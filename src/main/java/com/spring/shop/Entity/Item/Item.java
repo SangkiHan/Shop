@@ -12,6 +12,7 @@ import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
 
 import com.spring.shop.Entity.CategoryItem;
+import com.spring.shop.Exception.GlobalException;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -35,4 +36,16 @@ public abstract class Item {
 	private int price;
 	
 	private int stockQuantity;
+	
+	public void addStock(int quantity) {
+		this.stockQuantity += quantity;
+	}
+	
+	public void removeStock(int quantity) {
+		int resStock = this.stockQuantity - quantity;
+		if(resStock<0) {
+			throw new GlobalException("수량이 더 필요합니다.");
+		}
+		this.stockQuantity = resStock;
+	}
 }
