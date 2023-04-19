@@ -27,5 +27,4 @@ public class MemberRepository {
 	public Member find(Long Id) {
 		return em.find(Member.class, Id);
 	}
-
 }

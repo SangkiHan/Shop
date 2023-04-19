@@ -4,29 +4,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
+@ToString
 @Entity
-public class Member {
+public class Category {
 	
-	@Id @GeneratedValue
-	@Column(name = "member_id")
-	private long id;
-	private String username;
+	@javax.persistence.Id @GeneratedValue
+	@Column(name = "category_id")
+	private Long Id;
 	
-	@Embedded
-	private Address address;
+	private String name;
 	
-	@OneToMany(mappedBy = "member")
-	private List<Order> orders = new ArrayList<>();
-
+	@OneToMany(mappedBy = "category")
+	private List<CategoryItem> categoryItem = new ArrayList<>();
 }
