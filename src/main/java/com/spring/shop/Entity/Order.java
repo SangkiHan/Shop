@@ -16,8 +16,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.spring.shop.Entity.Item.Item;
-
 import lombok.Getter;
 import lombok.Setter;
 
@@ -31,7 +29,7 @@ public class Order {
 	@Column(name="orders_id")
 	private Long Id;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="member_id")
 	private Member member;
 	
@@ -46,5 +44,20 @@ public class Order {
 	
 	@Enumerated(EnumType.STRING)
 	private OrderStatus status;
+	
+	public void setMember(Member member) {
+		this.member = member;
+		member.getOrders().add(this);
+	}
+	
+	public void setOrderItem(OrderItem orderItem) {
+		orderItems.add(orderItem);
+		orderItem.setOrder(this);
+	}
+	
+	public void setDelivery(Delivery delivery) {
+		this.delivery = delivery;
+		delivery.setOrder(this);
+	}
 	
 }

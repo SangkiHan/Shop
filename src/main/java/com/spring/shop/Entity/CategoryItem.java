@@ -2,6 +2,7 @@ package com.spring.shop.Entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -22,12 +23,22 @@ public class CategoryItem {
 	@Column(name = "category_item_id")
 	private Long Id;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "category_id")
 	private Category category;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "item_id")
 	private Item item;
+	
+	public void setCategory(Category category) {
+		this.category = category;
+		category.getCategoryItem().add(this);
+	}
+	
+	public void setItem(Item item) {
+		this.item = item;
+		item.getCategoryItems().add(this);
+	}
 	
 }

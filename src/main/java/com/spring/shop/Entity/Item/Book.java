@@ -2,7 +2,6 @@ package com.spring.shop.Entity.Item;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.Inheritance;
 
 import lombok.Getter;
 import lombok.Setter;
