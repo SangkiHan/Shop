@@ -1,4 +1,4 @@
-package com.spring.shop.Exception;
+package com.spring.shop.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,5 +13,12 @@ public class GlobalExceptionHandler {
 		
 		e.printStackTrace();
 		return new ResponseEntity<>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+	
+	@ExceptionHandler(Exception.class)
+	protected ResponseEntity<String> handleTesseractException(Exception e){
+		
+		e.printStackTrace();
+		return new ResponseEntity<>("시스템에서 알수없는 에러가 발생했습니다.",HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 }

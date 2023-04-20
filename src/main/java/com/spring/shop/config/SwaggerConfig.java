@@ -1,4 +1,4 @@
-package com.spring.shop.Config;
+package com.spring.shop.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

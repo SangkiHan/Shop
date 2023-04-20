@@ -1,4 +1,4 @@
-package com.spring.shop.Entity.Item;
+package com.spring.shop.entity.item;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,8 +11,8 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
 
-import com.spring.shop.Entity.CategoryItem;
-import com.spring.shop.Exception.GlobalException;
+import com.spring.shop.entity.CategoryItem;
+import com.spring.shop.exception.GlobalException;
 
 import lombok.Getter;
 import lombok.Setter;

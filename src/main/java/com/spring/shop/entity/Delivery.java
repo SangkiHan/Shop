@@ -1,4 +1,4 @@
-package com.spring.shop.Entity;
+package com.spring.shop.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Embedded;

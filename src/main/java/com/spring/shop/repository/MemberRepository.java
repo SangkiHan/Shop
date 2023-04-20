@@ -1,4 +1,4 @@
-package com.spring.shop.Repository;
+package com.spring.shop.repository;
 
 import java.util.List;
 
@@ -7,7 +7,7 @@ import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Repository;
 
-import com.spring.shop.Entity.Member;
+import com.spring.shop.entity.Member;
 
 @Repository
 public class MemberRepository {

@@ -1,4 +1,4 @@
-package com.spring.shop.Exception;
+package com.spring.shop.exception;
 
 public class GlobalException extends RuntimeException  {
 	

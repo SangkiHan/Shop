@@ -1,4 +1,4 @@
-package com.spring.shop.Entity;
+package com.spring.shop.entity;
 
 import java.util.ArrayList;
 import java.util.List;

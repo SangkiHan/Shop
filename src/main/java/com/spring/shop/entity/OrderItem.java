@@ -1,4 +1,4 @@
-package com.spring.shop.Entity;
+package com.spring.shop.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -7,7 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import com.spring.shop.Entity.Item.Item;
+import com.spring.shop.entity.item.Item;
 
 import lombok.Getter;
 import lombok.Setter;

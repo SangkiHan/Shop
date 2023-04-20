@@ -1,4 +1,4 @@
-package com.spring.shop.Entity.Item;
+package com.spring.shop.entity.item;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;

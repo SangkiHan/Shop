@@ -1,4 +1,4 @@
-package com.spring.shop.Controller;
+package com.spring.shop.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

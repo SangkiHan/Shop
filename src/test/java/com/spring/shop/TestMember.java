@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.spring.shop.Entity.Member;
-import com.spring.shop.Repository.MemberRepository;
+import com.spring.shop.entity.Member;
+import com.spring.shop.repository.MemberRepository;
 
 
 @SpringBootTest

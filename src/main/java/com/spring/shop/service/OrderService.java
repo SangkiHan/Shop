@@ -1,20 +1,17 @@
-package com.spring.shop.Service;
-
-import java.util.ArrayList;
-import java.util.List;
+package com.spring.shop.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.spring.shop.Entity.Delivery;
-import com.spring.shop.Entity.Member;
-import com.spring.shop.Entity.Order;
-import com.spring.shop.Entity.OrderItem;
-import com.spring.shop.Entity.Item.Item;
-import com.spring.shop.Repository.ItemRepository;
-import com.spring.shop.Repository.MemberRepository;
-import com.spring.shop.Repository.OrderRepository;
+import com.spring.shop.entity.Delivery;
+import com.spring.shop.entity.Member;
+import com.spring.shop.entity.Order;
+import com.spring.shop.entity.OrderItem;
+import com.spring.shop.entity.item.Item;
+import com.spring.shop.repository.ItemRepository;
+import com.spring.shop.repository.MemberRepository;
+import com.spring.shop.repository.OrderRepository;
 
 @Service
 @Transactional(readOnly = true)

@@ -1,4 +1,4 @@
-package com.spring.shop.Entity;
+package com.spring.shop.entity;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -17,7 +17,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.spring.shop.Exception.GlobalException;
+import com.spring.shop.exception.GlobalException;
 
 import lombok.Getter;
 import lombok.Setter;

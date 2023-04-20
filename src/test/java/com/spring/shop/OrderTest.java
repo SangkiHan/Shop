@@ -3,15 +3,14 @@ package com.spring.shop;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
-import org.springframework.transaction.annotation.Transactional;
 
-import com.spring.shop.Entity.Address;
-import com.spring.shop.Entity.Member;
-import com.spring.shop.Entity.Item.Book;
-import com.spring.shop.Entity.Item.Item;
-import com.spring.shop.Service.ItemService;
-import com.spring.shop.Service.MemberService;
-import com.spring.shop.Service.OrderService;
+import com.spring.shop.entity.Address;
+import com.spring.shop.entity.Member;
+import com.spring.shop.entity.item.Book;
+import com.spring.shop.entity.item.Item;
+import com.spring.shop.service.ItemService;
+import com.spring.shop.service.MemberService;
+import com.spring.shop.service.OrderService;
 
 @SpringBootTest
 public class OrderTest {

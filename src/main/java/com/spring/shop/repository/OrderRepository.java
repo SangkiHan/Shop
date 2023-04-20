@@ -1,11 +1,11 @@
-package com.spring.shop.Repository;
+package com.spring.shop.repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Repository;
 
-import com.spring.shop.Entity.Order;
+import com.spring.shop.entity.Order;
 
 @Repository
 public class OrderRepository {
