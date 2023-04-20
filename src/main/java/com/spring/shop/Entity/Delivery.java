@@ -18,7 +18,7 @@ import lombok.Setter;
 public class Delivery {
 	
 	@javax.persistence.Id @GeneratedValue
-	@Column(name = "delivery_id")
+	@Column(name = "delivery_Id")
 	private Long Id;
 	
 	@OneToOne(mappedBy = "delivery", fetch = FetchType.LAZY)

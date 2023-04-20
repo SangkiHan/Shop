@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -15,6 +16,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.spring.shop.Exception.GlobalException;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -33,11 +36,11 @@ public class Order {
 	@JoinColumn(name="member_id")
 	private Member member;
 	
-	@OneToMany(mappedBy = "order")
+	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
 	private List<OrderItem> orderItems = new ArrayList<>();
 	
-	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "delivery_id")
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "delivery_Id")
 	private Delivery delivery;
 	
 	private LocalDateTime orderDate;
@@ -60,4 +63,33 @@ public class Order {
 		delivery.setOrder(this);
 	}
 	
+	/*
+	 * 주문 생성 메소드
+	 * */
+	public static Order createOrder(Member member, Delivery delivery, OrderItem... orderitems) {
+		Order order = new Order();
+		order.setMember(member);
+		order.setDelivery(delivery);
+		
+		for(OrderItem orderitem : orderitems) {
+			order.setOrderItem(orderitem);
+		}
+		
+		order.setStatus(OrderStatus.ORDER);
+		order.setOrderDate(LocalDateTime.now());
+		
+		return order;
+	}
+	
+	public void cancel() {
+		if(delivery.getStatus()==DeliveryStatus.COMP) {
+			throw new GlobalException("이미 발송된 건은 취소가 불가능합니다.");
+		}
+		
+		setStatus(OrderStatus.CANCEL);
+		
+		for(OrderItem orderItem : orderItems) {
+			orderItem.cancel();
+		}
+	}
 }

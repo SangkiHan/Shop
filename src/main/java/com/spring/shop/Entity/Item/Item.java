@@ -44,7 +44,7 @@ public abstract class Item {
 	public void removeStock(int quantity) {
 		int resStock = this.stockQuantity - quantity;
 		if(resStock<0) {
-			throw new GlobalException("수량이 더 필요합니다.");
+			throw new GlobalException("수량이 부족합니다.");
 		}
 		this.stockQuantity = resStock;
 	}
