@@ -23,6 +23,10 @@ public class OrderSimpleController {
 	@GetMapping("/api/v1/simple-orders")
 	public List<Order> ordersV1(OrderSearch orderSearch){
 		List<Order> all = orderRepository.findAllByString(orderSearch);
+		for(Order order : all) {
+			order.getMember().getUsername();
+			order.getDelivery().getAddress();
+		}
 		return all;
 	}
 	
