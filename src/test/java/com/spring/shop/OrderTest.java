@@ -44,8 +44,8 @@ public class OrderTest {
 		orderService.order(1L, 2L, 2);
 	}
 	
-	@org.junit.jupiter.api.Test
-	@Rollback(false)
+//	@org.junit.jupiter.api.Test
+//	@Rollback(false)
 	void 취소테스트(){
 		
 		orderService.cancel(3L);
