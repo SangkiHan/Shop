@@ -4,16 +4,11 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Join;
-import javax.persistence.criteria.JoinType;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
 
 import org.springframework.stereotype.Repository;
 
 import com.spring.shop.controller.dto.OrderSearch;
+import com.spring.shop.controller.dto.OrderSimpleQueryDto;
 import com.spring.shop.entity.Order;
 
 @Repository
@@ -59,5 +54,13 @@ public class OrderRepository {
 						" join fetch o.delivery d", Order.class)
 				.getResultList();
 									
+	}
+	
+	public List<OrderSimpleQueryDto> findOrderDtos(OrderSearch orderSearch){
+		return em.createQuery("select new com.spring.shop.controller.dto.OrderSimpleQueryDto(o.id, m.username, o.orderDate, o.status, d.address)"+
+							" from Order o"+
+							" join o.member m"+
+							" join o.delivery d", OrderSimpleQueryDto.class)
+					.getResultList();
 	}
 }

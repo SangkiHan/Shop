@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.spring.shop.controller.dto.OrderSearch;
+import com.spring.shop.controller.dto.OrderSimpleQueryDto;
 import com.spring.shop.controller.dto.SimpleOrderDto;
 import com.spring.shop.entity.Order;
 import com.spring.shop.repository.OrderRepository;
@@ -45,5 +46,11 @@ public class OrderSimpleController {
 				.map(o -> new SimpleOrderDto(o))
 				.collect(Collectors.toList());
 		return result;
+	}
+	
+	@GetMapping("/api/v4/simple-orders")
+	public List<OrderSimpleQueryDto> ordersV4(OrderSearch orderSearch){
+		List<OrderSimpleQueryDto> orders = orderRepository.findOrderDtos(orderSearch);
+		return orders;
 	}
 }
