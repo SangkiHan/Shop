@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.spring.shop.controller.dto.OrderDto;
+import com.spring.shop.controller.dto.OrderFlatDto;
 import com.spring.shop.controller.dto.OrderQueryDto;
 import com.spring.shop.controller.dto.OrderSearch;
 import com.spring.shop.entity.Order;
@@ -81,6 +82,16 @@ public class OrderApiController {
 	@GetMapping("/api/v5/orders")
 	public List<OrderQueryDto> ordersV5(){
 		List<OrderQueryDto> orders = orderQueryRepository.findAllByDto_optimizatioin();
+		
+		return orders;
+	}
+	
+	/*
+	 * 쿼리1번으로 해결할 수 있지만 중복데이터를 걸러내는 작업을 추가해야하고, 페이징이 불가하다.
+	 * */
+	@GetMapping("/api/v6/orders")
+	public List<OrderFlatDto> ordersV6(){
+		List<OrderFlatDto> orders = orderQueryRepository.findAllByDto_flat();
 		
 		return orders;
 	}
