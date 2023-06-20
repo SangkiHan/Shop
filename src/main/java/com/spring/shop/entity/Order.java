@@ -66,7 +66,7 @@ public class Order {
 	/*
 	 * 주문 생성 메소드
 	 * */
-	public static Order createOrder(Member member, Delivery delivery, OrderItem... orderitems) {
+	public static Order createOrder(Member member, Delivery delivery, List<OrderItem> orderitems) {
 		Order order = new Order();
 		order.setMember(member);
 		order.setDelivery(delivery);

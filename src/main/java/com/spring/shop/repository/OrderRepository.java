@@ -63,4 +63,17 @@ public class OrderRepository {
 							" join o.delivery d", OrderSimpleQueryDto.class)
 					.getResultList();
 	}
+	
+	/*
+	 * distinct를 사용하면 일대다 일시 중복되는 것을 JPA가 걸러준다.
+	 * 단점은 페이징처리가 불가하다. 이유 : JPA에서 모든데이터를 DB에서 읽어오고 메모리에서 페이징을 해버려서 위험하다.
+	 * */
+	public List<Order> findAllWithItem(OrderSearch orderSearch){
+		return em.createQuery("select distinct o from Order o"+
+							" join fetch o.member m"+
+							" join fetch o.delivery d"+
+							" join fetch o.orderItems oi"+
+							" join fetch oi.item i", Order.class)
+					.getResultList();
+	}
 }
