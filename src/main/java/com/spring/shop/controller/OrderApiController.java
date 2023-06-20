@@ -8,9 +8,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.spring.shop.controller.dto.OrderDto;
+import com.spring.shop.controller.dto.OrderQueryDto;
 import com.spring.shop.controller.dto.OrderSearch;
 import com.spring.shop.entity.Order;
 import com.spring.shop.entity.OrderItem;
+import com.spring.shop.repository.OrderQueryRepository;
 import com.spring.shop.repository.OrderRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -20,6 +22,7 @@ import lombok.RequiredArgsConstructor;
 public class OrderApiController {
 	
 	private final OrderRepository orderRepository;
+	private final OrderQueryRepository orderQueryRepository;
 	
 	@GetMapping("/api/v1/orders")
 	public List<Order> ordersV1(OrderSearch orderSearch){
@@ -55,9 +58,30 @@ public class OrderApiController {
 	public List<OrderDto> ordersV31(@RequestParam(value = "offset", defaultValue = "0") int offset,
 									@RequestParam(value = "limit", defaultValue = "100") int limit ){
 		List<Order> orders = orderRepository.findAllWithMemberDeliveyPaging(offset, limit);
+		
 		List<OrderDto> collect = orders.stream()
 				.map(o -> new OrderDto(o))
 				.collect(Collectors.toList());
 		return collect;
+	}
+	
+	/*
+	 * 쿼리가 1대N으로 생성됌
+	 * */
+	@GetMapping("/api/v4/orders")
+	public List<OrderQueryDto> ordersV4(){
+		List<OrderQueryDto> orders = orderQueryRepository.findOrderQueryDtos();
+		
+		return orders;
+	}
+	
+	/*
+	 * 쿼리가 2개로 해결됌
+	 * */
+	@GetMapping("/api/v5/orders")
+	public List<OrderQueryDto> ordersV5(){
+		List<OrderQueryDto> orders = orderQueryRepository.findAllByDto_optimizatioin();
+		
+		return orders;
 	}
 }
