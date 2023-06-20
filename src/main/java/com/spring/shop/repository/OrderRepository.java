@@ -54,7 +54,15 @@ public class OrderRepository {
 						" join fetch o.delivery d", Order.class)
 				.getResultList();
 									
-	}
+	}public List<Order> findAllWithMemberDeliveyPaging(int offset, int limit){
+		return em.createQuery("select o from Order o"+
+						" join fetch o.member m"+
+						" join fetch o.delivery d", Order.class)
+				.setFirstResult(offset)
+				.setMaxResults(limit)
+				.getResultList();
+							
+}
 	
 	public List<OrderSimpleQueryDto> findOrderDtos(OrderSearch orderSearch){
 		return em.createQuery("select new com.spring.shop.controller.dto.OrderSimpleQueryDto(o.id, m.username, o.orderDate, o.status, d.address)"+
