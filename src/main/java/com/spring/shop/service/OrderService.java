@@ -11,6 +11,7 @@ import com.spring.shop.entity.Delivery;
 import com.spring.shop.entity.Member;
 import com.spring.shop.entity.Order;
 import com.spring.shop.entity.OrderItem;
+import com.spring.shop.entity.item.Book;
 import com.spring.shop.entity.item.Item;
 import com.spring.shop.repository.ItemRepository;
 import com.spring.shop.repository.MemberRepository;
@@ -37,7 +38,8 @@ public class OrderService {
 		List<OrderItem> orderItems = new ArrayList<>();
 		
 		for(Long Id : itemId) {
-			Item item = itemRepository.findOne(Id);
+			Item item = new Book();
+//					itemRepository.findOne(Id);
 			OrderItem orderItem = OrderItem.createOrderItem(item, item.getPrice(), count);
 			orderItems.add(orderItem);
 		}

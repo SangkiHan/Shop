@@ -15,31 +15,19 @@ public class ItemRepository {
 	@PersistenceContext
 	private EntityManager em;
 	
-	
-	/*
-	 * 상품저장
-	 * */
 	public void save(Item item) {
 		if(item.getId()==null) {
 			em.persist(item);
-		}else {
+		}
+		else {
 			em.merge(item);
 		}
 	}
 	
-	/*
-	 * 상품조회
-	 * */
-	public Item findOne(Long id) {
-		return em.find(Item.class, id);
+	public List<Item> selectList() {
+		return em.createQuery(
+				"select i"+
+				" from Item i", Item.class)
+			.getResultList();
 	}
-
-	/*
-	 * 상품리스트 조회
-	 * */
-	public List<Item> findList(){
-		return em.createQuery("select I from Item I", Item.class)
-				.getResultList();
-	}
-
 }
