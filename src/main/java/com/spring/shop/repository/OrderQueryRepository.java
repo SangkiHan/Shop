@@ -46,20 +46,22 @@ public class OrderQueryRepository {
 	}
 	
 	public Map<Long, List<OrderItemQueryDto>> findOrderMap(List<Long> orderIds){
-		List<OrderItemQueryDto> orderItems = em.createQuery(
-				"select new com.spring.shop.controller.dto.OrderItemQueryDto(oi.order.Id, i.name, oi.orderPrice, oi.count)"+
-				" from OrderItem oi"+
-				" join oi.item i"+
-				" where oi.order.Id in :orderIds", OrderItemQueryDto.class)
-		.setParameter("orderIds", orderIds)
-		.getResultList();
+		List<OrderItemQueryDto> orderItems = 
+				em.createQuery(
+							"select new com.spring.shop.controller.dto.OrderItemQueryDto(oi.order.Id, i.name, oi.orderPrice, oi.count)"+
+							" from OrderItem oi"+
+							" join oi.item i"+
+							" where oi.order.Id in :orderIds", OrderItemQueryDto.class)
+					.setParameter("orderIds", orderIds)
+					.getResultList();
 
 		return orderItems.stream()
 				.collect(Collectors.groupingBy(orderItemQueryDto -> orderItemQueryDto.getOrderId()));
 	}
 	
 	public List<OrderItemQueryDto> findOrderItems(Long orderId){
-		return em.createQuery("select new com.spring.shop.controller.dto.OrderItemQueryDto(oi.order.Id, i.name, oi.orderPrice, oi.count)"+
+		return em.createQuery(
+						"select new com.spring.shop.controller.dto.OrderItemQueryDto(oi.order.Id, i.name, oi.orderPrice, oi.count)"+
 						" from OrderItem oi"+
 						" join oi.item i"+
 						" where oi.order.Id = :orderId", OrderItemQueryDto.class)

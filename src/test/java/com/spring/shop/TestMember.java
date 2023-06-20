@@ -19,13 +19,6 @@ public class TestMember {
 	void Test(){
 		
 		Member member = new Member();
-		member.setUsername("상기");
-		
-		Long id = memberRepository.save(member);
-		
-		Member findMember = memberRepository.find(id);
-		
-		System.out.println("Member : "+findMember.toString());
 	}
 
 }

@@ -1,52 +1,46 @@
 package com.spring.shop.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.spring.shop.controller.dto.MemberDto;
 import com.spring.shop.entity.Member;
 import com.spring.shop.repository.MemberRepository;
 
+import lombok.RequiredArgsConstructor;
+
 @Service
 @Transactional(readOnly = true)
+@RequiredArgsConstructor
 public class MemberService {
 	
-	@Autowired
-	private MemberRepository memberRepository; 
+	private final MemberRepository memberRepository; 
 	
-	/*
-	 * 회원가입
-	 * */
+	
+	public void join(MemberDto.Info request) {
+		Member member = new Member();
+		memberRepository.join(member.createMember(request.getName(), request.getAddress()));
+	}
+	
 	@Transactional
-	public Long join(Member member) {
-		validateDuplicateMember(member);
-		memberRepository.save(member);
-		return member.getId();
+	public void update(MemberDto.Info request) {
+		Member member = memberRepository.selectOne(request.getId());
+		member.updateMember(request.getName(), request.getAddress());
 	}
 	
-	/*
-	 * 회원리스트조회
-	 * */
-	public List<Member> findAll(){
-		return memberRepository.findAll();
+	public MemberDto.Info selectOne(Long id){
+		Member result = memberRepository.selectOne(id);
+		return new MemberDto.Info(result);
 	}
 	
-	/*
-	 * 회원조회
-	 * */
-	public Member findOne(Long Id) {
-		return memberRepository.find(Id);
-	}
-	
-	/*
-	 * 회원가입시 중복체크
-	 * */
-	private void validateDuplicateMember(Member member) {
-		List<Member> findMember = memberRepository.findByUsername(member.getUsername());
-		if(!findMember.isEmpty()) {
-			throw new IllegalStateException("이미 존재하는 회원입니다.");
-		}
+	public List<MemberDto.MemberList> selectMemberList() {
+		List<Member> result = memberRepository.selectMemberList();
+		
+		return result.stream()
+				.map(o -> new MemberDto.MemberList(o))
+				.collect(Collectors.toList());
 	}
 }

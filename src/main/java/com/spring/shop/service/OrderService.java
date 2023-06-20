@@ -32,7 +32,8 @@ public class OrderService {
 	@Transactional
 	public Long order(Long memberId, List<Long> itemId, int count) {
 		
-		Member member = memberRepository.find(memberId);
+		Member member = new Member();
+//				memberRepository.find(memberId);
 		List<OrderItem> orderItems = new ArrayList<>();
 		
 		for(Long Id : itemId) {

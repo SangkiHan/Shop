@@ -3,47 +3,31 @@ package com.spring.shop.repository;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Repository;
 
 import com.spring.shop.entity.Member;
 
+import lombok.RequiredArgsConstructor;
+
 @Repository
+@RequiredArgsConstructor
 public class MemberRepository {
 	
-	@PersistenceContext
-	private EntityManager em;
+	private final EntityManager em;
 	
-	/*
-	 * 회원가입
-	 * */
-	public Long save(Member member) {
+	public void join(Member member) {
 		em.persist(member);
-		return member.getId();
 	}
 	
-	/*
-	 * 회원조회
-	 * */
-	public Member find(Long Id) {
-		return em.find(Member.class, Id);
+	public Member selectOne(Long id) {
+		return em.find(Member.class, id);
 	}
 	
-	/*
-	 * 회원리스트조회
-	 * */
-	public List<Member> findAll() {
-		return em.createQuery("select m from Member m", Member.class)
-				.getResultList();
-	}
-	
-	/*
-	 * 회원조회 by username
-	 * */
-	public List<Member> findByUsername(String username) {
-		return em.createQuery("select m from Member m where m.username = :username", Member.class)
-				.setParameter("username", username)
-				.getResultList();
+	public List<Member> selectMemberList(){
+		return em.createQuery(
+				"select m"+
+				" from Member m", Member.class)
+			.getResultList();
 	}
 }

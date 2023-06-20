@@ -6,11 +6,10 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -28,16 +27,18 @@ public class Member {
 	@Embedded
 	private Address address;
 	
-	@JsonIgnore
-	@OneToMany(mappedBy = "member")
+	@OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
 	private List<Order> orders = new ArrayList<>();
 	
-	public static Member createMember(String name, String city, String street, String zipcode) {
+	public Member createMember(String name, Address address) {
 		Member member = new Member();
 		member.setUsername(name);
-		member.setAddress(new Address(city, street, zipcode));
-		
+		member.setAddress(address);
 		return member;
 	}
-
+	
+	public void updateMember(String name, Address address) {
+		this.setUsername(name);
+		this.setAddress(address);
+	}
 }

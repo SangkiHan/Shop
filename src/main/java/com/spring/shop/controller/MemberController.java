@@ -1,32 +1,55 @@
 package com.spring.shop.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.List;
+
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.spring.shop.controller.dto.MemberDto;
-import com.spring.shop.entity.Member;
 import com.spring.shop.service.MemberService;
 
+import lombok.RequiredArgsConstructor;
+
 @RestController
+@RequestMapping("/api/member")
+@RequiredArgsConstructor
 public class MemberController {
 	
-	@Autowired
-	private MemberService memberService;
+	private final MemberService memberService;
 	
-	@PostMapping(value = "/api/v1/join")
-	public void joinMember(@RequestBody MemberDto.ResgistMember request) {
-		
-		Member member = Member.createMember(request.getName(), request.getCity(), request.getStreet(), request.getZipcode());
-		
+	/*
+	 * 회원가입
+	 * */
+	@PostMapping("/join")
+	public void join(@RequestBody MemberDto.Info member) throws Exception{
 		memberService.join(member);
 	}
 	
-	@PostMapping(value = "/api/v1/member")
-	public MemberDto.selectMember selectMember(@RequestBody Long Id) {
-		
-		return new MemberDto.selectMember();
+	/*
+	 * 회원수정
+	 * */
+	@PostMapping("/update")
+	public void update(@RequestBody MemberDto.Info member) throws Exception{
+		memberService.update(member);
 	}
-
+	
+	/*
+	 * 회원상세
+	 * */
+	@PostMapping("/selectOne")
+	public MemberDto.Info selectOne(@RequestParam("id") Long id) throws Exception{
+		return memberService.selectOne(id);
+	}
+	
+	/*
+	 * 회원목록
+	 * */ 
+	@GetMapping("/selectList")
+	public List<MemberDto.MemberList> selectMemberList() throws Exception{
+		return memberService.selectMemberList();
+	}
 }
