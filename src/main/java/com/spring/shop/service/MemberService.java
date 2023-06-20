@@ -19,16 +19,10 @@ public class MemberService {
 	
 	private final MemberRepository memberRepository; 
 	
-	
-	public void join(MemberDto.Info request) {
+	@Transactional
+	public void save(MemberDto.Info request) {
 		Member member = new Member();
 		memberRepository.join(member.createMember(request.getName(), request.getAddress()));
-	}
-	
-	@Transactional
-	public void update(MemberDto.Info request) {
-		Member member = memberRepository.selectOne(request.getId());
-		member.updateMember(request.getName(), request.getAddress());
 	}
 	
 	public MemberDto.Info selectOne(Long id){

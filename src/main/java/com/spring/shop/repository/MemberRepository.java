@@ -17,7 +17,12 @@ public class MemberRepository {
 	private final EntityManager em;
 	
 	public void join(Member member) {
-		em.persist(member);
+		if(member.getId()==0) {
+			em.persist(member);
+		}
+		else {
+			em.merge(member);
+		}
 	}
 	
 	public Member selectOne(Long id) {

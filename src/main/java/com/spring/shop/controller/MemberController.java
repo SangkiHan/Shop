@@ -22,19 +22,11 @@ public class MemberController {
 	private final MemberService memberService;
 	
 	/*
-	 * 회원가입
+	 * 회원등록/수정
 	 * */
-	@PostMapping("/join")
-	public void join(@RequestBody MemberDto.Info member) throws Exception{
-		memberService.join(member);
-	}
-	
-	/*
-	 * 회원수정
-	 * */
-	@PostMapping("/update")
-	public void update(@RequestBody MemberDto.Info member) throws Exception{
-		memberService.update(member);
+	@PostMapping("/save")
+	public void save(@RequestBody MemberDto.Info member) throws Exception{
+		memberService.save(member);
 	}
 	
 	/*
