@@ -49,10 +49,4 @@ public abstract class Item {
 		}
 		this.stockQuantity = resStock;
 	}
-	
-	public void createItem(ItemDto.Info request) {
-		this.setName(request.getName());
-		this.setPrice(request.getPrice());
-		this.setStockQuantity(request.getStockQuantity());
-	};
 }

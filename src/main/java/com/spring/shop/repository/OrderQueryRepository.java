@@ -8,9 +8,9 @@ import javax.persistence.EntityManager;
 
 import org.springframework.stereotype.Repository;
 
-import com.spring.shop.controller.dto.OrderFlatDto;
-import com.spring.shop.controller.dto.OrderItemQueryDto;
-import com.spring.shop.controller.dto.OrderQueryDto;
+import com.spring.shop.controller.dto.practice.OrderFlatDto;
+import com.spring.shop.controller.dto.practice.OrderItemQueryDto;
+import com.spring.shop.controller.dto.practice.OrderQueryDto;
 
 import lombok.RequiredArgsConstructor;
 

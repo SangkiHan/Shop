@@ -1,4 +1,4 @@
-package com.spring.shop.controller;
+package com.spring.shop.controller.practice;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -6,11 +6,11 @@ import java.util.stream.Collectors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.spring.shop.controller.dto.OrderSearch;
-import com.spring.shop.controller.dto.OrderSimpleQueryDto;
-import com.spring.shop.controller.dto.SimpleOrderDto;
+import com.spring.shop.controller.dto.practice.OrderSearch;
+import com.spring.shop.controller.dto.practice.OrderSimpleQueryDto;
+import com.spring.shop.controller.dto.practice.SimpleOrderDto;
 import com.spring.shop.entity.Order;
-import com.spring.shop.repository.OrderRepository;
+import com.spring.shop.repository.OrderSimpleRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -18,7 +18,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class OrderSimpleController {
 	
-	private final OrderRepository orderRepository;
+	private final OrderSimpleRepository orderRepository;
 	
 	@GetMapping("/api/v1/simple-orders")
 	public List<Order> ordersV1(OrderSearch orderSearch){

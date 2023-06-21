@@ -1,4 +1,4 @@
-package com.spring.shop.controller.dto;
+package com.spring.shop.controller.dto.practice;
 
 import com.spring.shop.entity.OrderStatus;
 

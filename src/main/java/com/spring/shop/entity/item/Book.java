@@ -16,4 +16,12 @@ public class Book extends Item {
 	
 	private String author;
 	private String isbn;
+	
+	public void CreateBook(ItemDto.Book book) {
+		this.setName(book.getName());
+		this.setPrice(book.getPrice());
+		this.setStockQuantity(book.getStockQuantity());
+		this.setAuthor(book.getAuthor());
+		this.setIsbn(book.getIsbn());
+	}
 }

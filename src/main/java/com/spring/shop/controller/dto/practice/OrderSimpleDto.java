@@ -1,4 +1,4 @@
-package com.spring.shop.controller.dto;
+package com.spring.shop.controller.dto.practice;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -11,7 +11,7 @@ import com.spring.shop.entity.OrderStatus;
 import lombok.Data;
 
 @Data
-public class OrderDto {
+public class OrderSimpleDto {
 	
 	private Long orderId;
 	private String name;
@@ -20,7 +20,7 @@ public class OrderDto {
 	private Address address;
 	private List<OrderItemDto> orderItems;
 	
-	public OrderDto(Order order) {
+	public OrderSimpleDto(Order order) {
 		this.orderId = order.getId();
 		this.name = order.getMember().getUsername();
 		this.orderDate = order.getOrderDate();

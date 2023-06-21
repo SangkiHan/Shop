@@ -1,6 +1,7 @@
-package com.spring.shop.controller.dto;
+package com.spring.shop.controller.dto.practice;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import com.spring.shop.entity.Address;
 import com.spring.shop.entity.OrderStatus;
@@ -8,18 +9,22 @@ import com.spring.shop.entity.OrderStatus;
 import lombok.Data;
 
 @Data
-public class OrderSimpleQueryDto {
+public class OrderQueryDto {
+	
 	private Long orderId;
-	private String name;
-	private LocalDateTime orderDate;
+	private String name; 
+	private LocalDateTime localDateTime;
 	private OrderStatus orderStatus;
 	private Address address;
-	public OrderSimpleQueryDto(Long orderId, String name, LocalDateTime orderDate, OrderStatus orderStatus,
+	private List<OrderItemQueryDto> orderItems;
+	
+	public OrderQueryDto(Long orderId, String name, LocalDateTime localDateTime, OrderStatus orderStatus,
 			Address address) {
 		this.orderId = orderId;
 		this.name = name;
-		this.orderDate = orderDate;
+		this.localDateTime = localDateTime;
 		this.orderStatus = orderStatus;
 		this.address = address;
 	}
+	
 }

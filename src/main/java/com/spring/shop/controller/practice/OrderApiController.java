@@ -1,4 +1,4 @@
-package com.spring.shop.controller;
+package com.spring.shop.controller.practice;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -7,14 +7,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.spring.shop.controller.dto.OrderDto;
-import com.spring.shop.controller.dto.OrderFlatDto;
-import com.spring.shop.controller.dto.OrderQueryDto;
-import com.spring.shop.controller.dto.OrderSearch;
+import com.spring.shop.controller.dto.practice.OrderFlatDto;
+import com.spring.shop.controller.dto.practice.OrderQueryDto;
+import com.spring.shop.controller.dto.practice.OrderSearch;
+import com.spring.shop.controller.dto.practice.OrderSimpleDto;
 import com.spring.shop.entity.Order;
 import com.spring.shop.entity.OrderItem;
 import com.spring.shop.repository.OrderQueryRepository;
-import com.spring.shop.repository.OrderRepository;
+import com.spring.shop.repository.OrderSimpleRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -22,7 +22,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class OrderApiController {
 	
-	private final OrderRepository orderRepository;
+	private final OrderSimpleRepository orderRepository;
 	private final OrderQueryRepository orderQueryRepository;
 	
 	@GetMapping("/api/v1/orders")
@@ -38,30 +38,30 @@ public class OrderApiController {
 	}
 	
 	@GetMapping("/api/v2/orders")
-	public List<OrderDto> ordersV2(OrderSearch orderSearch){
+	public List<OrderSimpleDto> ordersV2(OrderSearch orderSearch){
 		List<Order> orders = orderRepository.findAllByString(orderSearch);
-		List<OrderDto> collect = orders.stream()
-				.map(o -> new OrderDto(o))
+		List<OrderSimpleDto> collect = orders.stream()
+				.map(o -> new OrderSimpleDto(o))
 				.collect(Collectors.toList());
 		return collect;
 	}
 	
 	@GetMapping("/api/v3/orders")
-	public List<OrderDto> ordersV3(OrderSearch orderSearch){
+	public List<OrderSimpleDto> ordersV3(OrderSearch orderSearch){
 		List<Order> orders = orderRepository.findAllWithItem(orderSearch);
-		List<OrderDto> collect = orders.stream()
-				.map(o -> new OrderDto(o))
+		List<OrderSimpleDto> collect = orders.stream()
+				.map(o -> new OrderSimpleDto(o))
 				.collect(Collectors.toList());
 		return collect;
 	}
 	
 	@GetMapping("/api/v3.1/orders")
-	public List<OrderDto> ordersV31(@RequestParam(value = "offset", defaultValue = "0") int offset,
+	public List<OrderSimpleDto> ordersV31(@RequestParam(value = "offset", defaultValue = "0") int offset,
 									@RequestParam(value = "limit", defaultValue = "100") int limit ){
 		List<Order> orders = orderRepository.findAllWithMemberDeliveyPaging(offset, limit);
 		
-		List<OrderDto> collect = orders.stream()
-				.map(o -> new OrderDto(o))
+		List<OrderSimpleDto> collect = orders.stream()
+				.map(o -> new OrderSimpleDto(o))
 				.collect(Collectors.toList());
 		return collect;
 	}

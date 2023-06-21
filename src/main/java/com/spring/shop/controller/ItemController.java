@@ -20,8 +20,8 @@ public class ItemController {
 	
 	private final ItemService itemService;
 	
-	@PostMapping("/save")
-	public void reist(@RequestBody ItemDto.Info request) {
+	@PostMapping("/save/book")
+	public void saveBook(@RequestBody ItemDto.Book request) {
 		itemService.save(request);
 	}
 	

@@ -1,4 +1,4 @@
-package com.spring.shop.controller.dto;
+package com.spring.shop.controller.dto.practice;
 
 import java.time.LocalDateTime;
 
