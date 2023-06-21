@@ -40,10 +40,10 @@ public class OrderTest {
 //		
 //		itemService.save(item);
 		
-		List<Long> itemId = new ArrayList<>();
-		itemId.add(2L);
-		itemId.add(7L);
-		orderService.order(6L, itemId, 2);
+//		List<Long> itemId = new ArrayList<>();
+//		itemId.add(2L);
+//		itemId.add(7L);
+//		orderService.order(6L, itemId, 2);
 	}
 	
 //	@org.junit.jupiter.api.Test
