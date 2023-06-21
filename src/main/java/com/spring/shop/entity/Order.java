@@ -17,8 +17,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.spring.shop.exception.GlobalException;
-
 import lombok.Getter;
 import lombok.Setter;
 
@@ -48,48 +46,16 @@ public class Order {
 	@Enumerated(EnumType.STRING)
 	private OrderStatus status;
 	
-	public void setMember(Member member) {
+	public void createOrder(Member member, List<OrderItem> orderItems, Delivery delivery) {
 		this.member = member;
-		member.getOrders().add(this);
-	}
-	
-	public void setOrderItem(OrderItem orderItem) {
-		orderItems.add(orderItem);
-		orderItem.setOrder(this);
-	}
-	
-	public void setDelivery(Delivery delivery) {
+		this.orderItems = orderItems;
 		this.delivery = delivery;
+		this.status = OrderStatus.ORDER;
 		delivery.setOrder(this);
+		member.getOrders().add(this);
+		for(OrderItem orderitem : orderItems) {
+			orderitem.setOrder(this);
+		}
 	}
 	
-	/*
-	 * 주문 생성 메소드
-	 * */
-	public static Order createOrder(Member member, Delivery delivery, List<OrderItem> orderitems) {
-		Order order = new Order();
-		order.setMember(member);
-		order.setDelivery(delivery);
-		
-		for(OrderItem orderitem : orderitems) {
-			order.setOrderItem(orderitem);
-		}
-		
-		order.setStatus(OrderStatus.ORDER);
-		order.setOrderDate(LocalDateTime.now());
-		
-		return order;
-	}
-	
-	public void cancel() {
-		if(delivery.getStatus()==DeliveryStatus.COMP) {
-			throw new GlobalException("이미 발송된 건은 취소가 불가능합니다.");
-		}
-		
-		setStatus(OrderStatus.CANCEL);
-		
-		for(OrderItem orderItem : orderItems) {
-			orderItem.cancel();
-		}
-	}
 }

@@ -11,7 +11,6 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
 
-import com.spring.shop.controller.dto.ItemDto;
 import com.spring.shop.entity.CategoryItem;
 import com.spring.shop.exception.GlobalException;
 
