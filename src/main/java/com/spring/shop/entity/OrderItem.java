@@ -41,4 +41,8 @@ public class OrderItem {
 		this.count = count;
 		item.removeStock(count);
 	}
+	
+	public void cancelOrderItem(int count) {
+		this.item.addStock(count);
+	}
 }

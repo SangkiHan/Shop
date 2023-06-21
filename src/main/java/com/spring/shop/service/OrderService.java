@@ -2,6 +2,7 @@ package com.spring.shop.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -49,4 +50,23 @@ public class OrderService {
 		orderRepository.save(order);
 	}
 	
+	@Transactional
+	public void cancel(Long orderId) {
+		Order order = selectOne(orderId);
+		order.cancelOrder();
+	}
+	
+	public Order selectOne(Long orderId) {
+		return orderRepository.selectOne(orderId);
+	}
+	
+	public List<OrderDto.Info> selectList(Long memberId){
+		List<Order> orderList = orderRepository.selectList(memberId);
+		
+		List<OrderDto.Info> orderInfos = orderList.stream()
+				.map(o -> new OrderDto.Info(o))
+				.collect(Collectors.toList());
+		
+		return orderInfos;
+	}
 }

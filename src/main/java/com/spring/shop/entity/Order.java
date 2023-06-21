@@ -17,6 +17,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.spring.shop.exception.GlobalException;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -51,11 +53,22 @@ public class Order {
 		this.orderItems = orderItems;
 		this.delivery = delivery;
 		this.status = OrderStatus.ORDER;
+		this.orderDate = LocalDateTime.now();
 		delivery.setOrder(this);
 		member.getOrders().add(this);
 		for(OrderItem orderitem : orderItems) {
 			orderitem.setOrder(this);
 		}
+	}
+	
+	public void cancelOrder() {
+		if(DeliveryStatus.COMP.equals(this.delivery.getStatus())) {
+			throw new GlobalException("ORDERERROR","배송이 완료된 건은 취소가 불가능 합니다.");
+		}
+		for(OrderItem orderItem : this.orderItems) {
+			orderItem.getItem().addStock(orderItem.getCount());
+		}
+		this.status = OrderStatus.CANCEL;
 	}
 	
 }
